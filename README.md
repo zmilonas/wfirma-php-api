@@ -4,7 +4,7 @@ Klasa PHP do konstruowania prostych zapytań do API wfirma
 Mniej lub bardziej dokładna **dokumentacja API wfirmy** (v2) jest dostępna na stronie - [doc.wfirma.pl]
 
 ## Metody
-**Nowe zapytanie do wfirmy**
+### Nowe zapytanie do wfirmy
 ```php 
 $wfirma = new wfirmaQuery('MODUŁ', 'AKCJA');
 ```
@@ -16,20 +16,37 @@ Pełna lista modułów i ich akcji jest na stronie [doc.wfirma.pl]
 
 Uwaga, można kontruować żądania z elementem zmiennym w URL na przykład `$pdf = new wfirmaQuery('invoices', "download/{$fv}");` aby otrzymać pojedynczy element, jeśli dana akcja obsługuje taki sposób formułowania żądań.
 
-**Ustawienie parametru**
+### Ustawienie parametru
 ```php
 $wfirma->setParameter("PARAMETR", "wartosc");
 ```
 
-**Dodawanie warunku**
+### Dodawanie warunku
 ```php
 $wfirma->addCondition("POLE", "OPERATOR", "WARTOSC");
 ```
 `POLE` to nazwa pola w zwracanej odpowiedzi np. `date` albo `total`
 
-`OPERATOR` to jeden z operatarów podobnie jak w SQL - `q`, `ne`, `gt`, `lt`, `ge`, `le`, `like`, `not like`, `in`
+`OPERATOR` to jeden z operatarów podobnie jak w SQL - `eq` (==), `ne` (!==), `gt` (>), `lt` (<), `ge` (<=), `le` (>=), `like`, `not like`, `in`
 
 `WARTOSC` to wartość, którą zgodnie z operatorem ma ten warunek spełnić
+
+### Ustawienia sortowania
+```php
+$wfirma->setOrder("POLE", "KOLEJNOŚĆ");
+```
+
+`POLE` to nazwa pola w zwracanej odpowiedzi np. `date` albo `created`
+
+`KOLEJNOŚĆ` przyjmuje `asc` dla kolejności rosnącej i `desc` dla malejącej.
+
+### Konkretne informacje w odpowiedzi
+**Uwaga ta metoda jest bardzo niekonsekwentna. Nazwy nie pokrywają się z nazwami w odpowiedzi na żądanie (camelCase zamiast _ oraz kropki jako dzieci drzewa) i nie zwraca błędu przy poadniu nieistniejącego pola jak również przy podaniu jednego pola zmienia strukturę odpowiedzi żądania. Niestety wina leży po stronie wFirmy i braku konsekwencji w nazewnictwie i braku bezpośredniego przełożenia parametru Fields i pól odpowedzi**
+```php
+$wfirma->setFields(["POLE1", "POLE2"]);
+```
+Jedynym źródłem jakichkolwiek informacji jest dokumentacja oficjalna [doc.wfirma.pl], która pod nagłówkiem o konstruowaniu żądań typu find wyjaśnia pokrótce na przykładach działanie parametru *fields* aczkolwiek dokumentacja jest wybrakowana i aby móc poprawnie skonstruować żądanie i otrzymać odpowiednie pola trzeba działać na zasadzie prób i błedów.
+
 ## Przykład wykorzystania
 ```php
 <?php
