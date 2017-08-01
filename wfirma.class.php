@@ -38,7 +38,7 @@ class wfirmaQuery {
 					);
 	}
 	public function setOrder($field, $way) {
-		$this->parameter("order", array( $way => $field));
+		$this->setParameter("order", array( $way => $field));
 	}
 	public function setFields($arr) {
 		foreach($arr as $field) {
