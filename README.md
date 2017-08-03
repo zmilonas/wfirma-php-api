@@ -5,6 +5,11 @@ Mniej lub bardziej dokładna **dokumentacja API wfirmy** (v2) jest dostępna na 
 
 ## Użycie
 1. Pobrać i przenieść `wfirma.class.php` do katalogu roboczego
+1. Ustawić nazwę użytkownika i hasło na początku pliku (linie 3-4) `wfirma.class.php` w fragmencie
+```php
+private $WFIRMA_LOGIN = "";
+private $WFIRMA_PASSW = "";
+```
 1. Na początku pliku php z żądaniem załączyć plik
 ```php
 require_once 'wfirma.class.php';
