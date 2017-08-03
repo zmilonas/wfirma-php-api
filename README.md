@@ -1,7 +1,14 @@
-# wFirma API
+# Biblioteka PHP zapytań do wFirma 
 Klasa PHP do konstruowania prostych zapytań do API wfirma
 
 Mniej lub bardziej dokładna **dokumentacja API wfirmy** (v2) jest dostępna na stronie - [doc.wfirma.pl]
+
+## Użycie
+1. Pobrać i przenieść `wfirma.class.php` do katalogu roboczego
+1. Na początku pliku php z żądaniem załączyć plik
+```php
+require_once 'wfirma.class.php';
+```
 
 ## Metody
 ### Nowe zapytanie do wfirmy
